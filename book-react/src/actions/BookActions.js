@@ -25,3 +25,17 @@ export const getBacklog = () => async dispatch => {
         payload: res.data
     })
 };
+
+export const deleteBook = pt_id => async dispatch => {
+    if(
+        window.confirm(
+            `You are deleting book ${pt_id}, this action can not be undone`
+        )
+    ){
+        await axios.delete(`http://localhost:8080/api/board/${pt_id}`);
+        dispatch({
+            type: DELETE_BOOK,
+            payload: pt_id
+        })
+    }
+};
