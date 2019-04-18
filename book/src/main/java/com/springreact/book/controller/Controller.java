@@ -39,4 +39,10 @@ public class Controller {
     public Iterable<Book> getAllBooks(){
         return bookService.getAll();
     }
+
+    @DeleteMapping("/{pt_id}")
+    public ResponseEntity<?> deleteBook(@PathVariable Long pt_id){
+        bookService.deleteBook(pt_id);
+        return new ResponseEntity<String>("Book deleted", HttpStatus.OK);
+    }
 }

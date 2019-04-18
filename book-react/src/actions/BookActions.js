@@ -32,7 +32,7 @@ export const deleteBook = pt_id => async dispatch => {
             `You are deleting book ${pt_id}, this action can not be undone`
         )
     ){
-        await axios.delete(`http://localhost:8080/api/board/${pt_id}`);
+        await axios.delete(`http://localhost:8080/api/book/${pt_id}`);
         dispatch({
             type: DELETE_BOOK,
             payload: pt_id
