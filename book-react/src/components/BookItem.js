@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import {getBacklog} from "../actions/BookActions";
 import PropTypes from "prop-types";
 import {connect} from "react-redux"; 
+import OneBook from './OneBook'; 
 
 class BookItem extends Component {
     componentDidMount(){
       this.props.getBacklog();
     } 
 
-    onDeleteClick(pt_id){
-        this.props.deleteProjectTask(pt_id);
-      }
   render() {
-    return (
-      <div>
+    let BookTable
+    const {books} = this.props.books
+    let bookItems = []
 
+    const BookList = books => {
+      if(books.length < 1){
+        return(
+          <div className = "alert alert-info text-center" role = "alert">
+          No Book on this board.
+          </div>
+        );
+      }else{
+        const allBooks = books.map(book => (
+          <OneBook key={book.id} book={book}/>
+        ));
+        for(let i = 0; i<allBooks.length; i++){
+          bookItems.push(allBooks[i]);
+        }
+      }
+    
+    return (
+      <React.Fragment>
         <div className = "container">
           <h2>Your recent book list shown in table</h2>
           
           <table className="table table-bordered">
-            <thead>
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Book Name</th>
@@ -29,15 +46,21 @@ class BookItem extends Component {
                 <th scope="col">Actions</th>
               </tr>
             </thead>
-            <tbody>
-           
-            </tbody>
-          </table>
-        
-        </div>
-        
+              {bookItems}
+            </table>
       </div>
+        
+      </React.Fragment>
     )
+   };
+
+   BookTable = BookList(books);
+
+   return(
+     <div>
+        {BookTable}
+     </div>
+   )
   }
 }
 
