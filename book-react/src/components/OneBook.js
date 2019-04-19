@@ -21,11 +21,13 @@ class OneBook extends Component {
                     <td>{book.numOfPage}</td>
                     <td>{book.author.name}</td>
                     <td>
-                    {book.shops.map((shop) => 
-                       <p><strong>Country: </strong>{shop.country} <br/> <strong>State: </strong>{shop.state}<br/></p>
+                    {book.shops.map((shop) => (
+                      <p key={book.id}><strong>Country: </strong>{shop.country} <br/> <strong>State: </strong>{shop.state}<br/></p>
+                    )
+                       
                     )}
                     </td>
-                    <td><Link to={`/`} className="btn btn-primary">
+                    <td><Link to={`updateBook/${book.id}`} className="btn btn-primary">
                         View / Update
                     </Link>
                     <br/>

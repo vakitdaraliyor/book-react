@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addBook} from "../actions/BookActions";
+import {addBook, getBook} from "../actions/BookActions";
 
-class AddBook extends Component {
+class UpdateBook extends Component {
 
     constructor(){
         super()
         this.state = {
+            id: "",
             bookName: "",
             numOfPage: 1,
             shop: {
@@ -27,10 +28,25 @@ class AddBook extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.errors){
-            this.setState({errors:nextProps.errors})
-        }
+    componentDidMount(){
+        const {pt_id} = this.props.match.params;
+        this.props.getBook(pt_id);
+    }
+
+    onSubmit(e){
+        var newArray = this.state.shops.slice();
+            newArray.push(this.state.shop);
+        e.preventDefault()
+        const newBook = {
+            bookName: this.state.bookName,
+            numOfPage: this.state.numOfPage,
+            shops: newArray,
+            author: this.state.author,
+        };
+        //console.log(newArray);
+        //console.log(this.state.shop);
+        console.log(newBook);
+        this.props.addBook(newBook, this.props.history)
     }
     
     handleChangeFor = (propertyName) => (event) => {
@@ -59,20 +75,28 @@ class AddBook extends Component {
         this.setState({[e.target.name]:e.target.value})
     }
 
-    onSubmit(e){
-        var newArray = this.state.shops.slice();
-            newArray.push(this.state.shop);
-        e.preventDefault()
-        const newBook = {
-            bookName: this.state.bookName,
-            numOfPage: this.state.numOfPage,
-            shops: newArray,
-            author: this.state.author,
-        };
-        //console.log(newArray);
-        //console.log(this.state.shop);
-        //console.log(newBook);
-        this.props.addBook(newBook, this.props.history)
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors){
+            this.setState({errors: nextProps.errors});
+        }
+
+        const {
+            id,
+            bookName,
+            numOfPage,
+            shop:{country,state},
+            shops,
+            author:{authorName}
+        } = nextProps.book
+
+        this.setState({
+            id,
+            bookName,
+            numOfPage,
+            shop:{country,state},
+            shops,
+            author:{authorName}
+        });
     }
 
   render() {
@@ -157,13 +181,16 @@ class AddBook extends Component {
   }
 }
 
-AddBook.propTypes = {
+UpdateBook.propTypes = {
+    book: PropTypes.object.isRequired,
+    getBook: PropTypes.func.isRequired,
     addBook: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
+    book: state.book.book,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, {addBook}) (AddBook);
+export default connect(mapStateToProps, {getBook}, {addBook}) (UpdateBook);

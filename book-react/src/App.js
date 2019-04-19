@@ -6,6 +6,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import BookItem from './components/BookItem';
 import AddBook from './components/AddBook';
+import UpdateBook from './components/UpdateBook';
 
 class App extends Component {
 
@@ -18,8 +19,9 @@ class App extends Component {
               Book App
             </header>
 
-            <Route exact path= "/" component= {AddBook} />
+            <Route exact path = "/" component= {AddBook} />
             <Route exact path = "/bookItems" component= {BookItem} />
+            <Route exact path = "/updateBook/:pt_id" component= {UpdateBook} />
 
           </div>
         </Router>

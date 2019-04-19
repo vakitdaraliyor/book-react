@@ -39,3 +39,15 @@ export const deleteBook = pt_id => async dispatch => {
         })
     }
 };
+
+export const getBook = (pt_id, history) => async dispatch => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/book/${pt_id}`);
+        dispatch({
+            type: GET_BOOK,
+            payload: res.data
+        })
+    } catch (error) {
+        history.push("/");
+    }
+};
