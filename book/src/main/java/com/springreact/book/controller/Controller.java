@@ -46,7 +46,7 @@ public class Controller {
         return new ResponseEntity<String>("Book deleted", HttpStatus.OK);
     }
 
-    @GetMapping("/pt_id")
+    @GetMapping("/{pt_id}")
     public ResponseEntity<?> getBookById(@PathVariable Long pt_id){
         Book book = bookService.findById(pt_id);
         return new ResponseEntity<Book>(book, HttpStatus.OK);

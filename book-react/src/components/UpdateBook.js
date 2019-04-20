@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {addBook, getBook} from "../actions/BookActions";
 
@@ -19,7 +20,8 @@ class UpdateBook extends Component {
             shops:[],
             author: 
                 {
-                    authorName:""
+                    author_id:"",
+                    name: ""
                 }
             ,
             errors: {}
@@ -37,7 +39,8 @@ class UpdateBook extends Component {
         var newArray = this.state.shops.slice();
             newArray.push(this.state.shop);
         e.preventDefault()
-        const newBook = {
+        const updatedBook = {
+            id: this.state.id,
             bookName: this.state.bookName,
             numOfPage: this.state.numOfPage,
             shops: newArray,
@@ -45,8 +48,8 @@ class UpdateBook extends Component {
         };
         //console.log(newArray);
         //console.log(this.state.shop);
-        console.log(newBook);
-        this.props.addBook(newBook, this.props.history)
+        //console.log(newBook);
+        this.props.addBook(updatedBook, this.props.history)
     }
     
     handleChangeFor = (propertyName) => (event) => {
@@ -79,23 +82,22 @@ class UpdateBook extends Component {
         if(nextProps.errors){
             this.setState({errors: nextProps.errors});
         }
-
+        
         const {
             id,
             bookName,
             numOfPage,
-            shop:{country,state},
-            shops,
-            author:{authorName}
-        } = nextProps.book
+            shops:[{shopId,country,state}],
+            author:{author_id, name}
+        } = nextProps.oneBook
 
         this.setState({
             id,
             bookName,
             numOfPage,
-            shop:{country,state},
-            shops,
-            author:{authorName}
+            shop:{shopId, country, state},
+            shops:[],
+            author:{author_id, name}
         });
     }
 
@@ -106,6 +108,9 @@ class UpdateBook extends Component {
         <div className="container">
             <div className="row">
                 <div className="col-md-8 m-auto">
+                <Link to="/bookItems" className="btn btn-light">
+                        Back to Board
+                </Link>
                     <h4 className="display-4 text-center">Add /Update Book</h4><br/>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
@@ -165,12 +170,12 @@ class UpdateBook extends Component {
                             type="text" 
                             className="form-control form-control-lg" 
                             placeholder="Enter author name"
-                            value={this.state.author.authorName} 
+                            value={this.state.author.name} 
                             onChange={this.handleChangeFor('authorName')}
-                            name="authorName">                            
+                            name="name">                            
                             </input>
                         </div>
-                        <input type="submit" className="btn btn-primary btn-block mt-4" />
+                        <input type="submit" value="GÖNDER" className="btn btn-primary btn-block mt-4" />
                     </form>
                 </div>
             </div>
@@ -182,15 +187,15 @@ class UpdateBook extends Component {
 }
 
 UpdateBook.propTypes = {
-    book: PropTypes.object.isRequired,
+    oneBook: PropTypes.object.isRequired,
     getBook: PropTypes.func.isRequired,
     addBook: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    book: state.book.book,
+    oneBook: state.book.oneBook,
     errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, {getBook}, {addBook}) (UpdateBook);
+export default connect(mapStateToProps, {getBook, addBook}) (UpdateBook);

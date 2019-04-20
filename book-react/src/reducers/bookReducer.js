@@ -2,7 +2,7 @@ import {GET_BOOKS, DELETE_BOOK, GET_BOOK} from "../actions/types";
 
 const initialState = {
     books: [],
-    book: {}
+    oneBook: {}
 }
 
 export default function(state = initialState, action){
@@ -24,7 +24,7 @@ export default function(state = initialState, action){
         case GET_BOOK:
             return {
                 ...state,
-                book: action.payload
+                oneBook: action.payload
             }    
 
         default:

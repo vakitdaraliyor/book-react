@@ -7,7 +7,7 @@ import OneBook from './OneBook';
 class BookItem extends Component {
     componentDidMount(){
       this.props.getBacklog();
-    } 
+    }
 
   render() {
     let BookTable

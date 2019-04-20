@@ -18,7 +18,7 @@ class AddBook extends Component {
             shops:[],
             author: 
                 {
-                    authorName:""
+                    authorName: ""
                 }
             ,
             errors: {}
