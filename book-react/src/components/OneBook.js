@@ -19,10 +19,10 @@ class OneBook extends Component {
                     <td>{book.id}</td>
                     <td>{book.bookName}</td>
                     <td>{book.numOfPage}</td>
-                    <td>{book.author.name}</td>
+                    <td>{book.author.authorName}</td>
                     <td>
                     {book.shops.map((shop) => (
-                      <p key={book.id}><strong>Country: </strong>{shop.country} <br/> <strong>State: </strong>{shop.state}<br/></p>
+                      <p key={shop.shopId}><strong>Country: </strong>{shop.country} <br/> <strong>State: </strong>{shop.state}<br/></p>
                     )
                        
                     )}

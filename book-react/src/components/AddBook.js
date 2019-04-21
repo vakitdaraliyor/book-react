@@ -82,7 +82,7 @@ class AddBook extends Component {
         <div className="container">
             <div className="row">
                 <div className="col-md-8 m-auto">
-                    <h4 className="display-4 text-center">Add /Update Book</h4><br/>
+                    <h4 className="display-4 text-center">Add Book</h4><br/>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <h4>Enter Book Name:</h4>
@@ -93,7 +93,7 @@ class AddBook extends Component {
                             })}
                              name="bookName"
                              value={this.state.bookName}
-                             placeholder="Enter book name" 
+                             placeholder="Enter book name*" 
                              onChange={this.onChange}
                              />
                              {

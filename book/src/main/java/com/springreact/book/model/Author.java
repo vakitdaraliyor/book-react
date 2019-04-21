@@ -10,6 +10,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
     private Long author_id;
+    @Column(name = "author_name")
     private String authorName;
 
     public Author() {}
@@ -22,12 +23,11 @@ public class Author {
         this.author_id = author_id;
     }
 
-    public String getName() {
+    public String getAuthorName() {
         return authorName;
     }
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
-
 }

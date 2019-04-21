@@ -20,8 +20,7 @@ class UpdateBook extends Component {
             shops:[],
             author: 
                 {
-                    author_id:"",
-                    name: ""
+                    authorName: ""
                 }
             ,
             errors: {}
@@ -88,7 +87,7 @@ class UpdateBook extends Component {
             bookName,
             numOfPage,
             shops:[{shopId,country,state}],
-            author:{author_id, name}
+            author:{author_id, authorName}
         } = nextProps.oneBook
 
         this.setState({
@@ -97,7 +96,7 @@ class UpdateBook extends Component {
             numOfPage,
             shop:{shopId, country, state},
             shops:[],
-            author:{author_id, name}
+            author:{author_id, authorName}
         });
     }
 
@@ -111,7 +110,7 @@ class UpdateBook extends Component {
                 <Link to="/bookItems" className="btn btn-light">
                         Back to Board
                 </Link>
-                    <h4 className="display-4 text-center">Add /Update Book</h4><br/>
+                    <h4 className="display-4 text-center">Update Book</h4><br/>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <h4>Enter Book Name:</h4>
@@ -122,7 +121,7 @@ class UpdateBook extends Component {
                             })}
                              name="bookName"
                              value={this.state.bookName}
-                             placeholder="Enter book name" 
+                             placeholder="Enter book name*" 
                              onChange={this.onChange}
                              />
                              {
@@ -170,9 +169,9 @@ class UpdateBook extends Component {
                             type="text" 
                             className="form-control form-control-lg" 
                             placeholder="Enter author name"
-                            value={this.state.author.name} 
+                            value={this.state.author.authorName} 
                             onChange={this.handleChangeFor('authorName')}
-                            name="name">                            
+                            name="authorName">                            
                             </input>
                         </div>
                         <input type="submit" value="GÖNDER" className="btn btn-primary btn-block mt-4" />
