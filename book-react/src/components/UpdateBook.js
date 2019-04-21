@@ -51,8 +51,7 @@ class UpdateBook extends Component {
         this.props.addBook(updatedBook, this.props.history)
     }
     
-    handleChangeFor = (propertyName) => (event) => {
-        
+    handleChangeFor = (propertyName) => (event) => {  
         if(propertyName === 'authorName'){
             const {author} = this.state;
             const newAuthor = {
@@ -68,9 +67,7 @@ class UpdateBook extends Component {
                 [propertyName]: event.target.value
             };
             this.setState({shop: newShop});
-            
-        }
-            
+        }    
     }
 
     onChange(e){
