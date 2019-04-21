@@ -34,7 +34,6 @@ class AddBook extends Component {
     }
     
     handleChangeFor = (propertyName) => (event) => {
-        
         if(propertyName === 'authorName'){
             const {author} = this.state;
             const newAuthor = {
@@ -50,9 +49,7 @@ class AddBook extends Component {
                 [propertyName]: event.target.value
             };
             this.setState({shop: newShop});
-            
-        }
-            
+        }   
     }
 
     onChange(e){
