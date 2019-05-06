@@ -171,7 +171,7 @@ class UpdateBook extends Component {
                             name="authorName">                            
                             </input>
                         </div>
-                        <input type="submit" value="GÖNDER" className="btn btn-primary btn-block mt-4" />
+                        <input type="submit" value="UPDATE" className="btn btn-primary btn-block mt-4" />
                     </form>
                 </div>
             </div>
